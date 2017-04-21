@@ -1,0 +1,9 @@
+# 重写最后n个commit
+git rebase -i HEAD~n
+#mark commits by s(quash)
+git rebase --continue/--abort
+git push origin xxx --force
+
+#提交某个commit:
+git push origin HEAD~2:xxx --force
+
