@@ -1,0 +1,42 @@
+#
+#-vvv verbose ,-X hex raw output, -nn don't show protocol name, -i any interface, -A output ascii
+#tcpdump -vv -X -AAA -nn -i any -F filter
+# -F 过滤表达式文件
+#read from capture:
+#tcpdump -r dat
+#
+#write raw packet:
+#tcpdump -w dat
+#
+#list all device that could be captured:
+#tcpdump -D
+#
+#man pcap-filter
+#
+#src port 18080 && (tcp || ip || ip6 || arp || udp || rarp) && (dst 127.0.0.1 || src 10.73.56.250)
+#(tcp || ip || ip6 || arp || udp || rarp) && (dst 127.0.0.1 || src 10.73.56.250)
+#
+#18080端口的tcp流量
+#dst port 18080 && tcp
+#
+#和主机baidu的通信
+#host baidu.com
+#
+#指定端口区域
+#src or dst portrange 10000-20000
+#
+#ftp 协议端口和数据端口,名字见:/etc/services
+#port ftp or ftp-data
+#
+#捕获syn,但是localhost的syn不要
+#tcp[tcpflags] & tcp-syn != 0 and not dst host 127.0.0.1
+#其他语法:
+#tcp[tcpflags] & tcp-syn
+#tcp[tcpflags] & tcp-ack
+#tcp[tcpflags] & tcp-fin
+#
+#从ip数据报第二个字节开始，提取2个字节的bits(默认提取一个字节).
+#这个是ip数据报的头部长度字段值
+#ip[2:2] > 576
+
+port 18080 && tcp
