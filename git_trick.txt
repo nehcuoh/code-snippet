@@ -1,0 +1,5 @@
+ 忽略提交，但是不修改.gitignore
+.git/info/exclude
+ 查看修改文件列表
+git diff --name-only
+
