@@ -1,1 +1,1 @@
-curl -s "http://127.0.0.1:5020/stat" |python -m json.tool
+curl -s "http://10.71.40.50:5050/stat" | python -m json.tool

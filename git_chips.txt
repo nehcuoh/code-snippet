@@ -6,4 +6,3 @@ git push origin xxx --force
 
 #提交某个commit:
 git push origin HEAD~2:xxx --force
-

@@ -1,7 +1,14 @@
 #
+# 参数详解 https://danielmiessler.com/study/tcpdump/#gs.z4ct9co
+# 输出详解http://packetpushers.net/masterclass-tcpdump-interpreting-output/
 #-vvv verbose ,-X hex raw output, -nn don't show protocol name, -i any interface, -A output ascii
 #tcpdump -vv -X -AAA -nn -i any -F filter
+#-n 不显示端口对应协议
+#-nn 不显示端口名和域名
+# -S 绝对 tcp 序列号
+# -t,-tttt 人类可读时间
 # -F 过滤表达式文件
+# -c 抓几个包
 #read from capture:
 #tcpdump -r dat
 #

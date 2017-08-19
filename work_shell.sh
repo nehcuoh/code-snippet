@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 username="houchen"
 password="asdfghjkl;'"
 port="8022"
