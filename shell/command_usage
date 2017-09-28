@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+dumploader(){
+    echo "<?php" > src/Classes.php
+    echo "/* Automatic generate. Don't edit manually */" >> src/Classes.php
+    find src -iname *.php -type f | sed 's#src\/##g'\
+    | while read php; do
+        echo "require_once '$php';" >> src/Classes.php
+    done;
+}
+
+release(){
+    version="v`cat VERSION`"
+    if [[ "$version" == "v" ]]; then
+        echo "version not specified"
+        exit 1
+    fi
+
+    #while 循环里的命令在子进程
+    git tag | while read v;do
+        if [[ "$version" == "$v"  ]]; then
+            exit 1
+        fi
+    done
+
+    if [ $? -eq 1 ]; then
+        echo "$v version already exists"
+        exit 1
+    fi
+
+    #检查版本
+    sed  -i '' "/VERSION/ s/\"\([^\"]*\)\"/\"${version}\"/" src/Config.php
+    git commit -a -m "RELEASE ${version}"
+    commit=`git rev-parse HEAD`
+    git tag -a "$version" -m "sdk ${version} release" "$commit"
+    git push origin "$version"
+}
+
+case "$1" in
+   dumploader)
+    $1
+    ;;
+    release)
+    $1
+    ;;
+    *)
+    echo "Usage: $0 {dumploader|release} [version]"
+esac
+
+exit $?

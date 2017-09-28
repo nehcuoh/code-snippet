@@ -47,3 +47,9 @@
 #ip[2:2] > 576
 
 port 18080 && tcp
+
+#过滤 rst 包
+#tcpdump -i any  -vvv -tttt -n  'tcp[13] & 4 = 4' and dst port 3422
+
+#抓 http 包
+#tcpdump -i any -A -s 0 -c 1000 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'
